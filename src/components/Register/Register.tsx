@@ -1,22 +1,22 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
-import { Grid, Typography } from '@material-ui/core';
+import { Typography, Grid } from '@material-ui/core';
 import Alert from '@material-ui/lab/Alert'
 import useFormInput from '../../hooks/form/useFormInput';
-import { login as handleLogin } from '../../utils/firebase/Auth'
+import { signup as handleSignup } from '../../utils/firebase/Auth'
 
 
-function Login(props: { setIsLogin: (value: boolean) => void }) {
-    const email = useFormInput('');
-    const password = useFormInput('');
+function SignUp(props: { setIsLogin: (value: boolean) => void }) {
     const [loading, setLoading] = useState(false)
     const [error, setError] = useState("")
+    const name = useFormInput('');
+    const email = useFormInput('');
+    const password = useFormInput('');
 
-    const onSubmit = (e: React.FormEvent<HTMLFormElement>): void => {
+    const handleSubmit = (e: React.FormEvent<HTMLFormElement>): void => {
         e.preventDefault()
-        setLoading(true)
-        handleLogin(email.value, password.value).then(() => {
+        handleSignup(email.value, password.value).then(() => {
             setLoading(false)
 
         }).catch((err) => {
@@ -25,21 +25,32 @@ function Login(props: { setIsLogin: (value: boolean) => void }) {
         })
     }
 
+
     return (
-        <form onSubmit={onSubmit}>
+        <form onSubmit={handleSubmit}>
             <Grid container direction="column" spacing={1}>
                 <Grid item>
-                    <Typography variant="h4" color="secondary" gutterBottom>Login</Typography>
+                    <Typography variant="h4" color="secondary" gutterBottom>Register</Typography>
                 </Grid>
-            {error && <Grid item><Alert severity="error">{error}</Alert></Grid>}
+                {error && <Grid item><Alert severity="error">{error}</Alert></Grid>}
+                <Grid item>
+                    <TextField
+                        placeholder="Enter your Name"
+                        label="Name"
+                        onChange={name.onChange}
+                        value={name.value}
+                        variant="outlined"
+                        fullWidth
+                    />
+                </Grid>
                 <Grid item>
                     <TextField
                         placeholder="Enter your email"
                         label="Email"
+                        type="email"
                         onChange={email.onChange}
                         value={email.value}
                         variant="outlined"
-                        type="email"
                         fullWidth
                     />
                 </Grid>
@@ -54,7 +65,7 @@ function Login(props: { setIsLogin: (value: boolean) => void }) {
                         fullWidth
                     /></Grid>
                 <Grid item>
-                    <Button type="submit" color="primary" variant="contained" size="large" disabled={loading} fullWidth>{loading ? "loading..." : "Login"}</Button>
+                    <Button type="submit" color="primary" variant="contained" size="large" disabled={loading} fullWidth>{loading ? "loading..." : "SignUp"}</Button>
                 </Grid>
             </Grid>
         </form>
@@ -62,4 +73,4 @@ function Login(props: { setIsLogin: (value: boolean) => void }) {
     );
 }
 
-export default Login;
+export default SignUp;
