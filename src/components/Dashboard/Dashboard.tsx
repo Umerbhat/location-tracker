@@ -1,4 +1,4 @@
-import React, { useCallback } from 'react';
+import React, { useCallback, useState } from 'react';
 import { logout as handleLogout } from '../../utils/firebase/Auth'
 import { Button, LinearProgress, Grid, Box } from '@material-ui/core';
 import AppBar from '@material-ui/core/AppBar';
@@ -13,12 +13,14 @@ import Map from '../Map';
 
 const Dashboard = () => {
     const [snapshots, loading, error] = useList(firebase.database().ref("locations"));
+    const [activeItem, setActiveItem] = useState(null)
     const handleActiveItemClick = useCallback((item) => {
+        setActiveItem(item)
 
     }, [])
     return (
         <div>
-            <AppBar position="static">
+            <AppBar position="sticky">
                 <Toolbar>
                     <Typography variant="h6">
                         Location Tracker
@@ -39,8 +41,8 @@ const Dashboard = () => {
                       </Box>
                     {snapshots.map((v: any) => <LocationItem data={v.val()} onClick={handleActiveItemClick} />)}
                 </Grid>
-                <Grid item>
-                    <Map/>
+                <Grid item style={{flex: 1}}>
+                    <Map data = {activeItem}/>
                 </Grid>
             </Grid>}
         </div>
