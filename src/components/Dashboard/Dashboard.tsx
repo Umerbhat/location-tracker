@@ -25,7 +25,7 @@ const Dashboard = () => {
                     <Typography variant="h6">
                         Location Tracker
                     </Typography>
-                    <Button color="inherit" onClick={handleLogout}>Logout</Button>
+                    <Box ml="auto"><Button color="inherit" onClick={handleLogout}>Logout</Button></Box>
                 </Toolbar>
             </AppBar>
             {error && <Alert severity="error">{error.message}</Alert>}
@@ -33,16 +33,16 @@ const Dashboard = () => {
             {!loading && snapshots && <Grid container>
                 <Grid item>
                     <Box p={2}>
-                    <Grid container justify="space-between">
-                        <Grid item><Typography variant="h5">Locations</Typography></Grid>
-                        <Grid item>
-                            <Button color="primary" variant="outlined">Add Location</Button></Grid>
-                      </Grid>
-                      </Box>
-                    {snapshots.map((v: any) => <LocationItem data={v.val()} onClick={handleActiveItemClick} />)}
+                        <Grid container justify="space-between">
+                            <Grid item><Typography variant="h5">Locations</Typography></Grid>
+                            <Grid item>
+                                <Button color="primary" variant="outlined">Add Location</Button></Grid>
+                        </Grid>
+                    </Box>
+                    {snapshots.map((v: any, index) => <LocationItem data={v.val()} onClick={handleActiveItemClick} key={index} />)}
                 </Grid>
-                <Grid item style={{flex: 1}}>
-                    <Map data = {activeItem}/>
+                <Grid item style={{ flex: 1 }}>
+                    <Map data={activeItem} />
                 </Grid>
             </Grid>}
         </div>

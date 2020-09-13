@@ -31,7 +31,7 @@ function Login(props: { setIsLogin: (value: boolean) => void }) {
                 <Grid item>
                     <Typography variant="h4" color="secondary" gutterBottom>Login</Typography>
                 </Grid>
-            {error && <Grid item><Alert severity="error">{error}</Alert></Grid>}
+                {error && <Grid item><Alert severity="error">{error}</Alert></Grid>}
                 <Grid item>
                     <TextField
                         placeholder="Enter your email"

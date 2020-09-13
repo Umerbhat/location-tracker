@@ -15,6 +15,7 @@ function SignUp(props: { setIsLogin: (value: boolean) => void }) {
     const password = useFormInput('');
 
     const handleSubmit = (e: React.FormEvent<HTMLFormElement>): void => {
+        setLoading(true)
         e.preventDefault()
         handleSignup(email.value, password.value).then(() => {
             setLoading(false)

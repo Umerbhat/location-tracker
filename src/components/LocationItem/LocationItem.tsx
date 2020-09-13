@@ -6,7 +6,7 @@ import CardActionArea from '@material-ui/core/CardActionArea';
 import CardContent from '@material-ui/core/CardContent';
 import Typography from '@material-ui/core/Typography';
 
-const useStyles = makeStyles((theme)=>({
+const useStyles = makeStyles((theme) => ({
     root: {
         width: 345,
         margin: theme.spacing(1, 0)
@@ -15,15 +15,15 @@ const useStyles = makeStyles((theme)=>({
         height: 140,
     },
     location: {
-        padding: theme.spacing(0.1,1),
+        padding: theme.spacing(0.1, 1),
         backgroundColor: theme.palette.primary.light,
         color: theme.palette.primary.contrastText,
         borderRadius: theme.spacing(0.4)
     }
 }));
 
-export default function LocationItem(props: {data: LocationItemType, onClick: (data: LocationItemType) => void}) {
-    const {data, onClick} = props
+export default function LocationItem(props: { data: LocationItemType, onClick: (data: LocationItemType) => void }) {
+    const { data, onClick } = props
     const classes = useStyles();
 
     return (

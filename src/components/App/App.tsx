@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { MuiThemeProvider, createMuiTheme } from "@material-ui/core/styles";
-import { CssBaseline, Grid, Box, Paper, Container, Typography, LinearProgress } from "@material-ui/core";
+import { CssBaseline, Container, LinearProgress } from "@material-ui/core";
 import { useAuthState } from 'react-firebase-hooks/auth';
 import firebase from '../../firebase'
 import purple from '@material-ui/core/colors/purple';
